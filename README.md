@@ -13,18 +13,18 @@ No accounts. No tracking. No data leaves your Mac.
 ### Homebrew (recommended)
 
 ```
-brew install --cask konradklonowski/tap/autopip
+brew install --cask Konradk1995/tap/autopip
 ```
 
 ### One-liner
 
 ```
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/konradklonowski/AutoPiP/main/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Konradk1995/AutoPiP/main/install.sh)"
 ```
 
 ### Manual
 
-1. Download `AutoPiP.zip` from the [latest release](https://github.com/konradklonowski/AutoPiP/releases/latest)
+1. Download `AutoPiP.zip` from the [latest release](https://github.com/Konradk1995/AutoPiP/releases/latest)
 2. Unzip, move `AutoPiP.app` to Applications
 3. Open it once
 
@@ -62,7 +62,7 @@ Under the hood:
 Requires Xcode.
 
 ```
-git clone https://github.com/konradklonowski/AutoPiP.git
+git clone https://github.com/Konradk1995/AutoPiP.git
 cd AutoPiP
 make install
 ```

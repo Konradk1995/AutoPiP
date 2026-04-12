@@ -2,7 +2,7 @@
 set -e
 
 APP="AutoPiP"
-REPO="konradklonowski/AutoPiP"
+REPO="Konradk1995/AutoPiP"
 INSTALL_DIR="$HOME/Applications"
 
 echo "Installing $APP..."

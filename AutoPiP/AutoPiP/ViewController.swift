@@ -8,7 +8,7 @@ import SafariServices
 import WebKit
 
 let extensionBundleIdentifier = "com.konrad.AutoPiP.Extension"
-let githubRepo = "konradklonowski/AutoPiP"
+let githubRepo = "Konradk1995/AutoPiP"
 
 class ViewController: NSViewController, WKNavigationDelegate, WKScriptMessageHandler {
 
