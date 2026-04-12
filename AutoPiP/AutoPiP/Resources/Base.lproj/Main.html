@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="../Style.css">
+    <script src="../Script.js" defer></script>
+</head>
+<body>
+    <div class="card">
+        <img src="../Icon.png" width="56" height="56" alt="" class="icon">
+        <h1>Auto PiP</h1>
+        <p class="subtitle">Picture-in-Picture on tab switch.</p>
+
+        <div class="status-row">
+            <div class="status">
+                <span class="dot state-on"></span>
+                <span class="dot dot-off state-off"></span>
+                <span class="dot dot-unknown state-unknown"></span>
+                <span class="label state-on">Active</span>
+                <span class="label state-off">Inactive</span>
+                <span class="label state-unknown">Checking...</span>
+            </div>
+            <span class="version" id="version"></span>
+        </div>
+
+        <div class="update" id="update" style="display:none">
+            <span class="update-text">Update available: <strong id="update-version"></strong></span>
+            <button class="update-btn" id="update-btn">Download</button>
+        </div>
+
+        <p class="hint state-off">Enable the extension in Safari Settings to get started.</p>
+
+        <button class="open-preferences">Open Safari Settings</button>
+
+        <p class="footer">by Con Radius</p>
+    </div>
+</body>
+</html>
