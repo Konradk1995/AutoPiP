@@ -1,17 +1,40 @@
-(function () {
+// Auto PiP — core logic. Runs in main world (page context).
+// When loaded as a userscript in an isolated world, the wrapper injects
+// itself into the page via <script> tag so pause() override works.
+// When loaded as a native Safari extension (manifest "world": "MAIN"), runs directly.
+
+(function autoPiP() {
   "use strict";
 
-  let target = null;
-  let switching = false;
-  let switchTimer;
-  let rafPending = false;
-  const nativePause = HTMLVideoElement.prototype.pause;
+  if (window.__autoPipInjected) return;
+
+  // Detect isolated content-script world and re-inject into main world.
+  if (document.head && !document.querySelector("script[data-autopip]")) {
+    try {
+      var s = document.createElement("script");
+      s.dataset.autopip = "1";
+      s.textContent = "(" + autoPiP.toString() + ")()";
+      document.head.appendChild(s);
+      s.remove();
+      return;
+    } catch (_) {
+      // CSP blocks inline scripts — fall through, run in isolated world.
+      // autoPictureInPicture still works, only pause override won't.
+    }
+  }
+  window.__autoPipInjected = true;
+
+  var target = null;
+  var switching = false;
+  var switchTimer;
+  var rafPending = false;
+  var nativePause = HTMLVideoElement.prototype.pause;
 
   function best() {
-    let pick = null, high = 0;
-    for (const v of document.querySelectorAll("video")) {
+    var pick = null, high = 0;
+    for (var v of document.querySelectorAll("video")) {
       if (!v.isConnected) continue;
-      let s = (v.clientWidth * v.clientHeight) / 100;
+      var s = (v.clientWidth * v.clientHeight) / 100;
       if (!v.paused && !v.ended) s += 1e4;
       if (v.readyState >= 2) s += 1e3;
       if (!v.muted) s += 500;
@@ -23,7 +46,7 @@
   function release() {
     if (!target) return;
     target.autoPictureInPicture = false;
-    delete target.pause; // restore prototype method
+    delete target.pause;
     target = null;
   }
 
@@ -32,13 +55,9 @@
     release();
     if (!v || !("autoPictureInPicture" in v)) return;
     v.autoPictureInPicture = true;
-    // Instance-level pause override — only this video, not the prototype.
-    // Sites call video.pause() on visibilitychange which kills playback
-    // before Safari can enter PiP. We block it during the switch window
-    // and while the video is actively in a PiP presentation.
     v.pause = function () {
-      const pip = this.webkitPresentationMode === "picture-in-picture" ||
-                  document.pictureInPictureElement === this;
+      var pip = this.webkitPresentationMode === "picture-in-picture" ||
+                document.pictureInPictureElement === this;
       if (switching || (pip && document.visibilityState === "hidden")) return;
       return nativePause.apply(this, arguments);
     };
@@ -62,7 +81,7 @@
       clearTimeout(switchTimer);
       return;
     }
-    let v = target;
+    var v = target;
     if (!v) { v = best(); claim(v); }
     if (!v || v.paused) return;
 
