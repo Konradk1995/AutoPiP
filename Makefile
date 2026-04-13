@@ -5,7 +5,7 @@ APP_PATH    := $(BUILD_DIR)/Build/Products/Release/$(APP_NAME).app
 INSTALL_DIR := $(HOME)/Applications
 DIST_DIR    := dist
 
-VERSION     := $(shell /usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" AutoPiP/AutoPiP/Info.plist 2>/dev/null || echo "1.0")
+VERSION     := $(shell python3 -c "import json; print(json.load(open('extension-src/manifest.json'))['version'])" 2>/dev/null || echo "1.0")
 
 # Pass TEAM_ID=XXXXXXXXXX to build a signed extension that survives restarts.
 # Without TEAM_ID the extension is ad-hoc signed (requires "Allow Unsigned Extensions").

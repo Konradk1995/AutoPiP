@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Auto PiP
 // @namespace    https://github.com/Konradk1995/AutoPiP
-// @version      1.0
+// @version      1.1
 // @description  Automatically enters Picture-in-Picture when you switch tabs or leave the browser.
 // @author       Konrad Klonowski
 // @match        *://*/*

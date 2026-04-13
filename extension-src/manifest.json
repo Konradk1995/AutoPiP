@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Auto PiP",
-  "version": "1.0",
+  "version": "1.1",
   "description": "Automatically enters Picture-in-Picture when you leave the tab.",
   "content_scripts": [
     {
